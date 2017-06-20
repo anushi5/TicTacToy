@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anushi.tictactoy.NameAuto"
+    android:background="@drawable/bg5">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Enter your name"
+            android:fontFamily="cursive"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:textColor="#f6732342"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="60dp"
+            android:layout_height="wrap_content"
+            android:textColor="#004d40"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Your Name"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/b"
+            android:layout_width="match_parent"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="60dp"
+            android:onClick="buClick"
+            android:shadowColor="#283593"
+            android:gravity="center"
+            android:background="#d32f2f"
+            android:textColor="#ffffff"
+            android:layout_height="match_parent"
+            android:text="Start"
+            android:fontFamily="sans-serif-condensed"/>
+    </TableRow>
+
+</TableLayout>

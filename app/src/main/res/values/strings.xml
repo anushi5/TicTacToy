@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TicTacToy</string>
+    <string name="title_activity_front">Front</string>
+</resources>
