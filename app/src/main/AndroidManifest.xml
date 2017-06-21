@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anushi.tictactoy">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET"
+        android:maxSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -17,15 +19,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:label="Game"/>
         <activity android:name=".Auto" />
-        <activity android:name=".NameTwo" />
-        <activity android:name=".NameAuto" />
+        <activity android:name=".NameTwo"
+            android:label="Names"/>
+        <activity android:name=".NameAuto"
+            android:label="Name"/>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".Login" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".OnlineGame"></activity>
+        <activity android:name=".Login"
+            android:label="Authentication"/>
+        <activity android:name=".SignUp"
+            android:label="Registration"/>
+        <activity android:name=".ResetPasswordActivity"
+            android:label="Reset"/>
+        <activity android:name=".OnlineGame"
+            android:label="Game"/>
     </application>
 
 </manifest>
