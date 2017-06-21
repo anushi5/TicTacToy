@@ -24,13 +24,13 @@ public class NameTwo extends AppCompatActivity {
         et1 = (EditText)findViewById(R.id.et1);
         et2 = (EditText)findViewById(R.id.et2);
         tv = (TextView)findViewById(R.id.tv);
-        toolbar.setNavigationIcon(R.drawable.bg3);
+        /*toolbar.setNavigationIcon(R.drawable.bg3);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
-        });
+        });*/
     }
 
     public void buClick(View view){
