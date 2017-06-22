@@ -44,17 +44,18 @@
             android:noHistory="true" />
         <activity
             android:name=".SignUp"
-            android:excludeFromRecents="true"
             android:label="Registration"
-            android:noHistory="true" />
+            />
         <activity
             android:name=".ResetPasswordActivity"
-            android:excludeFromRecents="true"
             android:label="Reset"
-            android:noHistory="true" />
+             />
         <activity
             android:name=".OnlineGame"
-            android:label="Game" />
+            android:label="Game"
+            android:noHistory="true"
+            android:excludeFromRecents="true"/>
+
         <activity android:name=".ProfileAct"
             android:label="Profile"/>
     </application>
