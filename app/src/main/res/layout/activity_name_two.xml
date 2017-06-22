@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.anushi.tictactoy.NameTwo"
-    android:background="@drawable/bg5">
+    android:background="@drawable/bg5"
+    android:id="@+id/tl">
 
     <TableRow
         android:layout_width="match_parent"
