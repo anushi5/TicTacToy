@@ -3,6 +3,8 @@ package com.example.anushi.tictactoy;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -48,5 +50,27 @@ public class Main2Activity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mainmenu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_about:{
+                Intent i= new Intent(Main2Activity.this,About.class);
+                startActivity(i);
+            }
+                return true;
+            case R.id.menu_settings:
+                return true;
+            case R.id.menu_logout:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
