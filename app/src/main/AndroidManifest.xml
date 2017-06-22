@@ -55,8 +55,10 @@
         <activity
             android:name=".OnlineGame"
             android:label="Game" />
-        <activity android:name=".ProfileAct"
-            android:label="Profile"/>
+        <activity
+            android:name=".ProfileAct"
+            android:label="Profile" />
+        <activity android:name=".About" />
     </application>
 
 </manifest>

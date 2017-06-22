@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         tv1.setText(pname1);
         tv2.setText(pname2);
     }
-
     public void buClick(View view){
         Button buSelected = (Button) view;
 
