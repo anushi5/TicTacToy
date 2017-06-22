@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class Main2Activity extends AppCompatActivity {
 
-    Button auto,two,online;
+    Button auto,two,online,profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,16 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Main2Activity.this, Login.class);
+                startActivity(i);
+            }
+        });
+
+        profile = (Button)findViewById(R.id.bprofile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Main2Activity.this, ProfileAct.class);
                 startActivity(i);
             }
         });
