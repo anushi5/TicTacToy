@@ -51,26 +51,4 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.mainmenu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_about:{
-                Intent i= new Intent(Main2Activity.this,About.class);
-                startActivity(i);
-            }
-                return true;
-            case R.id.menu_settings:
-                return true;
-            case R.id.menu_logout:
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

@@ -59,7 +59,6 @@
         <activity android:name=".ProfileAct"
             android:label="Profile"/>
         <activity android:name=".Invite_Accept" />
-        <activity android:name=".About" />
     </application>
 
 </manifest>
