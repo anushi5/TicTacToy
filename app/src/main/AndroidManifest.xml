@@ -44,19 +44,22 @@
             android:noHistory="true" />
         <activity
             android:name=".SignUp"
-            android:label="Registration" />
+            android:label="Registration"
+            />
         <activity
             android:name=".ResetPasswordActivity"
-            android:label="Reset" />
+            android:label="Reset"
+             />
         <activity
             android:name=".OnlineGame"
-            android:excludeFromRecents="true"
             android:label="Game"
-            android:noHistory="true" />
-        <activity
-            android:name=".ProfileAct"
-            android:label="Profile" />
+            android:noHistory="true"
+            android:excludeFromRecents="true"/>
+
+        <activity android:name=".ProfileAct"
+            android:label="Profile"/>
         <activity android:name=".Invite_Accept" />
+        <activity android:name=".About" />
     </application>
 
 </manifest>

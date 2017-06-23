@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anushi.tictactoy.About">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/about"/>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:textSize="40dp"
+                    android:text="Developers"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/colorPrimary"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:textSize="25dp"
+                    android:text="Anushi Tomar"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="20dp"
+
+                    />
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:textSize="25dp"
+                    android:text="Tushar Kumar"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="20dp"
+
+                    />
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tv3"
+                    android:textSize="25dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="DTUities"
+                    android:layout_marginLeft="24dp"/>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</RelativeLayout>
