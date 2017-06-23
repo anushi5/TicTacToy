@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,23 +37,24 @@ public class Invite_Accept extends AppCompatActivity {
     myAdapter Adapter;
     ListView lv;
     TextView tv;
+
     ArrayList<RequestList> mylist=new ArrayList<RequestList>();
     ArrayList<RequestList> templist=new ArrayList<RequestList>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite__accept);
-        Toast.makeText(getApplicationContext()," working 0 ",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext()," working 0 ",Toast.LENGTH_SHORT).show();
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         ed1=(EditText) findViewById(R.id.edinvite);
         lv=(ListView) findViewById(R.id.lvitem);
         tv=(TextView) findViewById((R.id.tvbar)) ;
-        Toast.makeText(getApplicationContext()," working 1 ",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext()," working 1 ",Toast.LENGTH_SHORT).show();
         // ye first error h ab ye dekh pta nhi kyu aa rha h dekha na ?
-        Toast.makeText(getApplicationContext()," trying to get list ",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext()," trying to get list ",Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(getApplicationContext()," list got  ",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext()," list got  ",Toast.LENGTH_SHORT).show();
 
         /// firebase listner
         myRef.child("Users").child(remove(user.getEmail())).child("request").addValueEventListener(new ValueEventListener() {
@@ -74,46 +76,7 @@ public class Invite_Accept extends AppCompatActivity {
             }
         });
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-               final RequestList s= mylist.get(position);
-                myRef.child("Users").child(s.username).child("playing").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                           String playing=(String) dataSnapshot.getValue();
-                        if(playing.matches("NO"))
-                        {
-                            Intent intent=new Intent(getApplicationContext(),OnlineGame.class);
-
-                            myRef.child("Users").child(s.username).child("playing").setValue("YES");
-                            myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("YES");
-                            startActivity(intent);
-                            myRef.child("Users").child(s.username).child("playing").setValue("NO");
-                            myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("NO");
-
-                        }
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(),"CANNOT START THE GAME PLAYER IS BUSY",Toast.LENGTH_SHORT).show();
-
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                //StartGame(remove(user.getEmail()) + ":"+ remove(s.username));
-
-
-               // MySample="O";
-            }
-        });
 
     }
 
@@ -122,8 +85,36 @@ public class Invite_Accept extends AppCompatActivity {
         if(!ed1.getText().toString().matches(""))
         {
             myRef.child("Users").child(remove(ed1.getText().toString())).child("request").push().setValue(user.getEmail());
+
+            myRef.child("Users").child(remove(user.getEmail())).child("with").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    String start=(String) dataSnapshot.getValue();
+                    //Toast.makeText(getApplicationContext(),"value changed to "+start,Toast.LENGTH_SHORT).show();
+                    String a=user.getUid();
+                    if(!a.matches(start))
+                    {
+
+                        Intent intent = new Intent(getApplicationContext(), OnlineGame.class);
+                        intent.putExtra("playgame",remove(user.getEmail())+":"+remove(ed1.getText().toString()));
+                        startActivity(intent);
+                        ///StartGame(remove(user.getEmail())+start);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
         }
     }
+
 
     public String remove(String e_mail)
     {
@@ -166,13 +157,64 @@ public class Invite_Accept extends AppCompatActivity {
 
             final RequestList s=requestitem.get(position);
             TextView tv=(TextView) myview.findViewById(R.id.tvrequestlist); //thrid error ab ye dekh
+            TextView bustatus=(TextView)  myview.findViewById(R.id.bustatus);
+            final Button buacc=(Button) myview.findViewById(R.id.buacc);
+            listen(s.username,buacc,bustatus);
+            buacc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+
+                    myRef.child("Users").child(s.username).child("with").setValue(remove(user.getEmail()));
+                    myRef.child("Users").child(s.username).child("playing").setValue("busy");
+                    Intent intent=new Intent(getApplicationContext(),OnlineGame.class);
+                    intent.putExtra("playgame",s.username+":"+remove(user.getEmail()));
+                    startActivity(intent);
+
+                }
+            });
             tv.setText(s.username);
+
             return myview;
         }
 
     }
+    void listen(final String name,final Button bucc,final TextView bus)
+    {
+        myRef.child("Users").child(name).child("playing").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String playing=(String) dataSnapshot.getValue();
+                String k=bus.getText().toString();
+                //Toast.makeText(getApplicationContext(),k +" "+ playing,Toast.LENGTH_SHORT).show();
+                if(playing.matches(k))
+                {
 
+                    bus.setText("free");
+                    myRef.child("Users").child(name).child("playing").setValue("free");
+                    bucc.setEnabled(true);
+
+
+                   // Toast.makeText(getApplicationContext(),"CANNOT START THE GAME PLAYER IS BUSY",Toast.LENGTH_SHORT).show();
+
+
+                }
+                else
+                {
+                    bus.setText("busy");
+                    myRef.child("Users").child(name).child("playing").setValue("free");
+                    bucc.setEnabled(false);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     ArrayList<RequestList> getlist(DataSnapshot dataSnapshot)
     {
 
@@ -208,6 +250,7 @@ public class Invite_Accept extends AppCompatActivity {
     // startgame
     public void StartGame(String PlaySession)
     {
+
         Toast.makeText(getApplicationContext(),PlaySession,Toast.LENGTH_SHORT).show();
 
     }

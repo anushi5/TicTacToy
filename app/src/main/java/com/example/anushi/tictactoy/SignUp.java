@@ -99,7 +99,9 @@ public class SignUp extends AppCompatActivity {
                                     FirebaseUser user= auth.getCurrentUser();
                                     myRef.child("Users").child(remove(user.getEmail())).child("request").setValue(user.getUid());
                                     // to signify i'm not playing
-                                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("NO");
+                                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                                    myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+
                                     startActivity(new Intent(SignUp.this, Invite_Accept.class));
                                     finish();
                                 }
