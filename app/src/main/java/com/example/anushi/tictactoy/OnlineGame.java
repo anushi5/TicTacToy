@@ -165,7 +165,7 @@ public class OnlineGame extends AppCompatActivity {
             }
             else {
                 Toast.makeText(getApplicationContext(),"Player 2 is Winner", Toast.LENGTH_LONG).show();
-                finish();
+               finish();
             }
         }
 
