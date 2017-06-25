@@ -78,6 +78,39 @@ public class Invite_Accept extends AppCompatActivity {
 
 
 
+
+        ///  listner on with
+        myRef.child("Users").child(remove(user.getEmail())).child("with").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String start=(String) dataSnapshot.getValue();
+                //Toast.makeText(getApplicationContext(),"starting the game ",Toast.LENGTH_SHORT).show();
+                String a=user.getUid();
+                //Toast.makeText(getApplicationContext(),"request accepted ",Toast.LENGTH_SHORT).show();
+                if(!a.matches(start))
+                {
+                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("busy");
+                    //myRef.child("Users").child(remove(a)).child("with").setValue(remove(user.getEmail()));
+                    Toast.makeText(getApplicationContext(),"request accepted ",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), OnlineGame.class);
+                    intent.putExtra("playgame",remove(user.getEmail())+":"+remove(start));
+                    startActivity(intent);
+                    // Todo later myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                    //Todo later myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+
+                    ///StartGame(remove(user.getEmail())+start);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     public void busend_invite(View view)
@@ -86,29 +119,7 @@ public class Invite_Accept extends AppCompatActivity {
         {
             myRef.child("Users").child(remove(ed1.getText().toString())).child("request").push().setValue(user.getEmail());
 
-            myRef.child("Users").child(remove(user.getEmail())).child("with").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    String start=(String) dataSnapshot.getValue();
-                    //Toast.makeText(getApplicationContext(),"value changed to "+start,Toast.LENGTH_SHORT).show();
-                    String a=user.getUid();
-                    if(!a.matches(start))
-                    {
-
-                        Intent intent = new Intent(getApplicationContext(), OnlineGame.class);
-                        intent.putExtra("playgame",remove(user.getEmail())+":"+remove(ed1.getText().toString()));
-                        startActivity(intent);
-                        ///StartGame(remove(user.getEmail())+start);
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
 
 
 
@@ -157,19 +168,59 @@ public class Invite_Accept extends AppCompatActivity {
 
             final RequestList s=requestitem.get(position);
             TextView tv=(TextView) myview.findViewById(R.id.tvrequestlist); //thrid error ab ye dekh
-            TextView bustatus=(TextView)  myview.findViewById(R.id.bustatus);
+            final TextView bustatus=(TextView)  myview.findViewById(R.id.bustatus);
             final Button buacc=(Button) myview.findViewById(R.id.buacc);
-            listen(s.username,buacc,bustatus);
+            //listen(s.username,buacc,bustatus);
+            myRef.child("Users").child(s.username).child("playing").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String playing=(String) dataSnapshot.getValue();
+                    String k=bustatus.getText().toString();
+                    //Toast.makeText(getApplicationContext(),k +" "+ playing,Toast.LENGTH_SHORT).show();
+                    if(playing.matches("free"))
+                    {
+
+                        bustatus.setText("free");
+                        //myRef.child("Users").child(s.username).child("playing").setValue("free");
+                        buacc.setEnabled(true);
+
+
+                        // Toast.makeText(getApplicationContext(),"CANNOT START THE GAME PLAYER IS BUSY",Toast.LENGTH_SHORT).show();
+
+
+                    }
+                    else
+                    {
+                        bustatus.setText("busy");
+                        //myRef.child("Users").child(s.username).child("playing").setValue("busy");
+                        buacc.setEnabled(false);
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             buacc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
 
                     myRef.child("Users").child(s.username).child("with").setValue(remove(user.getEmail()));
-                    myRef.child("Users").child(s.username).child("playing").setValue("busy");
+                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("busy");
+
+                    Toast.makeText(getApplicationContext(),"starting the game ",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(),OnlineGame.class);
                     intent.putExtra("playgame",s.username+":"+remove(user.getEmail()));
                     startActivity(intent);
+                    Toast.makeText(getApplicationContext(),"game ended",Toast.LENGTH_SHORT).show();
+                    // todo later myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                   // myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+
+
 
                 }
             });

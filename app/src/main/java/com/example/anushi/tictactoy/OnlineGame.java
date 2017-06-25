@@ -23,7 +23,7 @@ public class OnlineGame extends AppCompatActivity {
 
     int counts=0;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    DatabaseReference myRef = database.getReference();
     FirebaseAuth auth;
     FirebaseUser user;
     int turn=0;
@@ -46,7 +46,7 @@ public class OnlineGame extends AppCompatActivity {
         //myRef.child("playgame").child(playgame).child("turn").setValue(0);
 
 
-        myRef.child("playgame").child("winner").addValueEventListener(new ValueEventListener() {
+        myRef.child("playgame").child(playgame).child("winner").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String winner=(String) dataSnapshot.getValue();
@@ -55,13 +55,18 @@ public class OnlineGame extends AppCompatActivity {
                     if(winner.matches("DRAW")) {
                         Toast.makeText(getApplicationContext(),"DRAW",Toast.LENGTH_SHORT).show();
                         myRef.child("playgame").child(playgame).removeValue();
-                        finish();
+                       // myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                        //myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+                        //finish();
+
                     }
                     if(winner.matches("1"))
                         {
                             Toast.makeText(getApplicationContext(),p1+"is winner",Toast.LENGTH_SHORT).show();
                             myRef.child("playgame").child(playgame).removeValue();
-                            finish();
+                           // myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                           // myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+                          //  finish();
 
                         }
 
@@ -69,8 +74,14 @@ public class OnlineGame extends AppCompatActivity {
                     {
                         Toast.makeText(getApplicationContext(),p2+"is winner",Toast.LENGTH_SHORT).show();
                         myRef.child("playgame").child(playgame).removeValue();
-                        finish();
+                     //   myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                        //myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+                       // finish();
                     }
+
+                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                    myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+                    finish();
 
                 }
             }
@@ -83,14 +94,16 @@ public class OnlineGame extends AppCompatActivity {
 
 
         // TODO: 24/6/17 to add listner for moves so that it color the button
-        myRef.child("playgame").child("move").addValueEventListener(new ValueEventListener() {
+        myRef.child("playgame").child(playgame).child("move").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String move=(String) dataSnapshot.getValue();
                  int cid=0;
-                String[] split=move.split("@");
+
                 if(!move.matches(playgame))
                 {
+                     Toast.makeText(getApplicationContext(),"making a move",Toast.LENGTH_SHORT).show();
+                    String[] split=move.split("@");
                     if(split[1].matches(p1))
                     {
                         Button buSelected=(Button) findViewById(R.id.b1);
@@ -166,10 +179,6 @@ public class OnlineGame extends AppCompatActivity {
                                 cid=9;
                                 break;
 
-
-
-
-
                         }
                         PlayGame(cid,buSelected,split[1]);
 
@@ -181,7 +190,7 @@ public class OnlineGame extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
     }
@@ -194,11 +203,19 @@ public class OnlineGame extends AppCompatActivity {
 
     }
 
+   /* public void enable(View view)
+    {
+        if(turn%2==0)
+        {
+
+        }
+    }*/
     public void buClick(View view){
         Button buSelected = (Button) view;
 
         int CellId=0;
         counts +=1;
+       // enable(view);
         switch ((buSelected.getId())){
 
             case R.id.b1: CellId=1;
@@ -230,8 +247,9 @@ public class OnlineGame extends AppCompatActivity {
 
 
         }
-        myRef.child("playgame").child("move").setValue(CellId+"@"+remove(user.getEmail()));
-        if(turn%2!=0 && remove(user.getEmail()).matches(p1))
+        
+        myRef.child("playgame").child(playgame).child("move").setValue(CellId+"@"+remove(user.getEmail()));
+        /*if(turn%2!=0 && remove(user.getEmail()).matches(p1))
         {
             view.setEnabled(false);
             turn =turn +1;
@@ -240,7 +258,7 @@ public class OnlineGame extends AppCompatActivity {
         {
             view.setEnabled(false);
             turn =turn +1;
-        }
+        }*/
 
 
 
@@ -254,7 +272,6 @@ public class OnlineGame extends AppCompatActivity {
 
     void PlayGame(int CellId, Button buSelected,String name){
 
-        Log.d("Player:",String.valueOf(CellId));
 
         if(name.matches(p1)){
             buSelected.setText("X");
@@ -271,93 +288,101 @@ public class OnlineGame extends AppCompatActivity {
         }
 
         buSelected.setEnabled(false);
-        CheckWinner(counts);
+        CheckWinner();
 
     }
 
 
-    void CheckWinner(int counts){
+    void CheckWinner(){
         int Winner=-1;
         /// row 1
         if(Player1.contains(1) && Player1.contains(2) && Player1.contains(3)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
 
         }
         else if(Player2.contains(1) && Player2.contains(2) && Player2.contains(3)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         ///row  2
         else if(Player1.contains(4) && Player1.contains(5) && Player1.contains(6)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(4) && Player2.contains(5) && Player2.contains(6)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
 
         ///row 3
         else if(Player1.contains(7) && Player1.contains(8) && Player1.contains(9)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(7) && Player2.contains(8) && Player2.contains(9)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+           // myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         ///column 1
         else if(Player1.contains(1) && Player1.contains(4) && Player1.contains(7)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(1) && Player2.contains(4) && Player2.contains(7)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         ///column2
         else if(Player1.contains(2) && Player1.contains(5) && Player1.contains(8)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(2) && Player2.contains(5) && Player2.contains(8)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         ///column 3
         else if(Player1.contains(3) && Player1.contains(6) && Player1.contains(9)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(3) && Player2.contains(6) && Player2.contains(9)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         ///diagonal 1
         else if(Player1.contains(1) && Player1.contains(5) && Player1.contains(9)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(1) && Player2.contains(5) && Player2.contains(9)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         ///diagonal 2
         else if(Player1.contains(3) && Player1.contains(5) && Player1.contains(7)){
             Winner=1;
-            myRef.child("playgame").child(playgame).child("winner").setValue(1);
+            myRef.child("playgame").child(playgame).child("winner").setValue("1");
+
         }
         else if(Player2.contains(3) && Player2.contains(5) && Player2.contains(7)){
             Winner=2;
-            myRef.child("playgame").child(playgame).child("winner").setValue(2);
+            myRef.child("playgame").child(playgame).child("winner").setValue("2");
         }
 
         /*if(Winner !=-1){
