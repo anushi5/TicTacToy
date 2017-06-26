@@ -6,9 +6,11 @@ package com.example.anushi.tictactoy;
 
 public class RequestList {
     String username;
+    String key;
 
-    public RequestList(String username)
+    public RequestList(String username,String key)
     {
         this.username=username;
+        this.key=key;
     }
 }

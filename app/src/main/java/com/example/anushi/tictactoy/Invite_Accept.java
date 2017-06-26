@@ -37,6 +37,7 @@ public class Invite_Accept extends AppCompatActivity {
     myAdapter Adapter;
     ListView lv;
     TextView tv;
+    private boolean isInFront;
 
     ArrayList<RequestList> mylist=new ArrayList<RequestList>();
     ArrayList<RequestList> templist=new ArrayList<RequestList>();
@@ -57,6 +58,7 @@ public class Invite_Accept extends AppCompatActivity {
         //Toast.makeText(getApplicationContext()," list got  ",Toast.LENGTH_SHORT).show();
 
         /// firebase listner
+
         myRef.child("Users").child(remove(user.getEmail())).child("request").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,7 +68,9 @@ public class Invite_Accept extends AppCompatActivity {
                 templist.clear();;
                 templist=getlist(dataSnapshot);
                 Adapter=new myAdapter(templist);
-                lv.setAdapter(Adapter);
+                if(isInFront)
+                    lv.setAdapter(Adapter);
+
 
             }
 
@@ -75,8 +79,6 @@ public class Invite_Accept extends AppCompatActivity {
                 // Failed to read value
             }
         });
-
-
 
 
         ///  listner on with
@@ -90,12 +92,15 @@ public class Invite_Accept extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(),"request accepted ",Toast.LENGTH_SHORT).show();
                 if(!a.matches(start))
                 {
+                    myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
                     myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("busy");
                     //myRef.child("Users").child(remove(a)).child("with").setValue(remove(user.getEmail()));
                     Toast.makeText(getApplicationContext(),"request accepted ",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), OnlineGame.class);
                     intent.putExtra("playgame",remove(user.getEmail())+":"+remove(start));
                     startActivity(intent);
+                   // finish();
+
                     // Todo later myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
                     //Todo later myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
 
@@ -113,15 +118,29 @@ public class Invite_Accept extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        isInFront = true;
+    }
+    @Override
+    public  void onStart(){
+        super.onStart();
+        isInFront=true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isInFront = false;
+    }
+
+
     public void busend_invite(View view)
     {
         if(!ed1.getText().toString().matches(""))
         {
             myRef.child("Users").child(remove(ed1.getText().toString())).child("request").push().setValue(user.getEmail());
-
-
-
-
 
         }
     }
@@ -212,10 +231,12 @@ public class Invite_Accept extends AppCompatActivity {
                     myRef.child("Users").child(s.username).child("with").setValue(remove(user.getEmail()));
                     myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("busy");
 
-                    Toast.makeText(getApplicationContext(),"starting the game ",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"starting the game ",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(),OnlineGame.class);
                     intent.putExtra("playgame",s.username+":"+remove(user.getEmail()));
+                    intent.putExtra("keyofplayer",s.key);
                     startActivity(intent);
+                    //finish();
                     Toast.makeText(getApplicationContext(),"game ended",Toast.LENGTH_SHORT).show();
                     // todo later myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
                    // myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
@@ -246,6 +267,7 @@ public class Invite_Accept extends AppCompatActivity {
                     bucc.setEnabled(true);
 
 
+
                    // Toast.makeText(getApplicationContext(),"CANNOT START THE GAME PLAYER IS BUSY",Toast.LENGTH_SHORT).show();
 
 
@@ -274,10 +296,17 @@ public class Invite_Accept extends AppCompatActivity {
             if (td!=null){
 
                 String value;
+                String myKey;
                 for(String key:td.keySet()){
                     value=(String) td.get(key);
+                    myKey=key;
 
-                    mylist.add(new RequestList(remove(value)));
+
+                    if(!value.matches(user.getUid()))
+                    {
+                        mylist.add(new RequestList(remove(value),key));
+                    }
+
                 }
             }
 

@@ -100,6 +100,7 @@ public class SignUp extends AppCompatActivity {
                                     myRef.child("Users").child(remove(user.getEmail())).child("request").setValue(user.getUid());
                                     // to signify i'm not playing
                                     myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                                    myRef.child("Users").child(remove(user.getEmail())).child("request").push().setValue(user.getUid());
                                     myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
 
                                     startActivity(new Intent(SignUp.this, Invite_Accept.class));
