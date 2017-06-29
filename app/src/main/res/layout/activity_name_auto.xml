@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.anushi.tictactoy.NameAuto"
-    android:background="@drawable/bg5"
+    android:background="@drawable/th1"
     android:id="@+id/tl">
 
     <TableRow
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/et"
             android:layout_width="match_parent"
             android:layout_marginTop="70dp"
@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:textColor="#004d40"
             android:ems="10"
+            android:maxLength="8"
             android:inputType="textPersonName"
             android:hint="Your Name"/>
 

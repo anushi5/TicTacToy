@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:gravity="center"
-    android:background="@drawable/check1">
+    android:background="@drawable/th3">
 
         <TableRow
         android:layout_width="match_parent"

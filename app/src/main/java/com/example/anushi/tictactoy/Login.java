@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public  class Login extends AppCompatActivity {
 
@@ -27,10 +26,6 @@ public  class Login extends AppCompatActivity {
     private Button btnSignUp,btnLogin;
     private Button btnReset;
 
-    // Write a message to the database
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +34,7 @@ public  class Login extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(Login.this, Invite_Accept.class));
+            startActivity(new Intent(Login.this, OnlineGame.class));
             finish();
         }
 
@@ -73,7 +68,7 @@ public  class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = inputEmail.getText().toString();
+                String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
@@ -105,15 +100,7 @@ public  class Login extends AppCompatActivity {
                                         Toast.makeText(Login.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Toast.makeText(getApplicationContext()," Logged in!!",Toast.LENGTH_SHORT).show();
-                                    // adding to real time database
-                                    FirebaseUser user= auth.getCurrentUser();
-                                    myRef.child("Users").child(remove(user.getEmail())).child("request").setValue(user.getUid());
-                                    myRef.child("Users").child(remove(user.getEmail())).child("request").push().setValue(user.getUid());
-                                    // to signify i'm not playing
-                                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
-                                    myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
-                                    Intent intent = new Intent(Login.this, Invite_Accept.class);
+                                    Intent intent = new Intent(Login.this, OnlineGame.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -123,10 +110,22 @@ public  class Login extends AppCompatActivity {
         });
     }
 
-    public String remove(String e_mail)
-    {
-        String[] split= e_mail.split("@");
-        return split[0];
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_login, menu);
+            return true;
+        }
 
-    }
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.home:
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
+
+
 }
