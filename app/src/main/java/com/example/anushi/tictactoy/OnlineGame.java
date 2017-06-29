@@ -344,10 +344,10 @@ public class OnlineGame extends AppCompatActivity {
         if(Winner !=-1){
 
             if(Winner == 1){
-                Toast.makeText(getApplicationContext(),"Player 1 is winner",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),p1+" is Winner",Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(getApplicationContext(),"Player 2 is Winner", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),p2+" is Winner", Toast.LENGTH_SHORT).show();
             }
             myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
             //myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
