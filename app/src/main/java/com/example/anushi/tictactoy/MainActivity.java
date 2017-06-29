@@ -1,14 +1,19 @@
 package com.example.anushi.tictactoy;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tv1,tv2;
     int counts=0;
+    TableLayout tl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         String pname2 = b.getString("player2");
         tv1.setText(pname1);
         tv2.setText(pname2);
+        tl=(TableLayout)findViewById(R.id.tl);
     }
     public void buClick(View view){
         Button buSelected = (Button) view;
@@ -193,4 +200,128 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void BackButton(View view) {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setIcon(R.drawable.warning);
+        alert.setMessage("Are you sure you want to quit?");
+        alert.setTitle("WARNING");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"You clicked YES",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+
+        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"You clicked NO",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        alert.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.game_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.th1:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th1);
+                tv1.setTextColor(Color.parseColor("#880E4F"));
+                tv2.setTextColor(Color.parseColor("#880E4F"));
+                return true;
+
+            case R.id.th2:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th2);
+                tv1.setTextColor(Color.parseColor("#FBC02D"));
+                tv2.setTextColor(Color.parseColor("#FBC02D"));
+                return true;
+
+            case R.id.th3:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th3);
+                tv1.setTextColor(Color.parseColor("#E57373"));
+                tv2.setTextColor(Color.parseColor("#E57373"));
+                return true;
+
+            case R.id.th4:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th4);
+                tv1.setTextColor(Color.parseColor("#FFCC80"));
+                tv2.setTextColor(Color.parseColor("#FFCC80"));
+                return true;
+
+            case R.id.th5:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th5);
+                tv1.setTextColor(Color.parseColor("#BDBDBD"));
+                tv2.setTextColor(Color.parseColor("#BDBDBD"));
+                return true;
+
+            case R.id.th6:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th6);
+                tv1.setTextColor(Color.parseColor("#880E4F"));
+                tv2.setTextColor(Color.parseColor("#880E4F"));
+                return true;
+            case R.id.th7:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th7);
+                tv1.setTextColor(Color.parseColor("#FBC02D"));
+                tv2.setTextColor(Color.parseColor("#FBC02D"));
+                return true;
+            case R.id.th9:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th9);
+                tv1.setTextColor(Color.parseColor("#E57373"));
+                tv2.setTextColor(Color.parseColor("#E57373"));
+                return true;
+
+            case R.id.th10:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th10);
+                tv1.setTextColor(Color.parseColor("#FFCC80"));
+                tv2.setTextColor(Color.parseColor("#FFCC80"));
+                return true;
+
+            case R.id.th11:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th11);
+                tv1.setTextColor(Color.parseColor("#BDBDBD"));
+                tv2.setTextColor(Color.parseColor("#BDBDBD"));
+                return true;
+
+            case R.id.th12:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th12);
+                tv1.setTextColor(Color.parseColor("#BDBDBD"));
+                tv2.setTextColor(Color.parseColor("#BDBDBD"));
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

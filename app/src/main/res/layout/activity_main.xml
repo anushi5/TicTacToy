@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:gravity="center"
-    android:background="@drawable/check1">
+    android:background="@drawable/check1"
+    android:id="@+id/tl">
 
     <TableRow
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
         <TextView
             android:id="@+id/tv1"
             android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_marginLeft="20dp"
             android:layout_height="match_parent"
             android:textColor="#009688"
@@ -29,7 +30,7 @@
 
         <TextView
             android:id="@+id/tv2"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:text="Player 2"
@@ -123,4 +124,14 @@
             android:onClick="buClick"
             android:layout_marginRight="3pt"/>
     </TableRow>
+    <LinearLayout>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/quit"
+            android:layout_marginLeft="145dp"
+            android:onClick="BackButton"
+            android:background="@drawable/quit2"
+            />
+    </LinearLayout>
 </TableLayout>

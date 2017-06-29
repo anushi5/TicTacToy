@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.anushi.tictactoy.Main2Activity"
     android:orientation="vertical"
-    android:background="@drawable/bg2">
+    android:background="@drawable/th2">
 
     <Button
         android:id="@+id/btwo"
@@ -59,4 +59,5 @@
         android:layout_marginRight="20dp"
         android:textSize="20dp"
         />
+
 </LinearLayout>

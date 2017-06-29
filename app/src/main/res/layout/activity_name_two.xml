@@ -31,13 +31,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/et1"
             android:layout_marginTop="50dp"
             android:layout_width="350dp"
             android:layout_height="match_parent"
             android:textColor="#004d40"
             android:hint="Player 1"
+            android:maxLength="8"
             android:textSize="25dp"
             android:inputType="textPersonName" />
     </TableRow>
@@ -46,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/et2"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -54,6 +55,7 @@
             android:textColor="#004d40"
             android:inputType="textPersonName"
             android:textSize="25dp"
+            android:maxLength="8"
             android:hint="player 2" />
     </TableRow>
 

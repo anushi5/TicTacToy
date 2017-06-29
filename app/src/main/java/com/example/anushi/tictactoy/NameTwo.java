@@ -8,30 +8,41 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import static android.R.attr.itemBackground;
 import static android.R.attr.name;
 
 public class NameTwo extends AppCompatActivity {
 
-    EditText et1,et2;
+    AutoCompleteTextView et1,et2;
     TextView tv;
     TableLayout tl;
     Button b1;
+    String[] name={"Anushi ","Tushar","Anubhav","Dhruv","Kusum","Angel","Yash","Tanu","Yogesh","Shreya","Abhishek",
+            "Aditya","Anirudh","Ashutosh","Amit","Mansi","Charu","Ritika","Tanisha","Sanjiv","Gaurav","Garima","Pooja","Rupali","Himanshu",
+            "Ayush","Shivam"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_two);
 
-        et1 = (EditText)findViewById(R.id.et1);
-        et2 = (EditText)findViewById(R.id.et2);
+        et1 = (AutoCompleteTextView) findViewById(R.id.et1);
+        et2 = (AutoCompleteTextView)findViewById(R.id.et2);
         tv = (TextView)findViewById(R.id.tv);
-         tl=(TableLayout) findViewById(R.id.tl);
+        tl=(TableLayout) findViewById(R.id.tl);
         b1 = (Button)findViewById(R.id.b1);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,name);
+        et1.setAdapter(adapter);
+        et1.setThreshold(1);
+        et2.setAdapter(adapter);
+        et2.setThreshold(1);
     }
 
     @Override
@@ -95,6 +106,31 @@ public class NameTwo extends AppCompatActivity {
                 b1.setBackgroundColor(Color.parseColor("#BDBDBD"));
                 b1.setTextColor(Color.parseColor("#000000"));
                 return true;
+
+            case R.id.home:
+                finish();
+                return true;
+            case  R.id.th1:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th1);
+                tv.setTextColor(Color.parseColor("#000000"));
+                return true;
+
+            case  R.id.th2:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th2);
+                tv.setTextColor(Color.parseColor("#FFFFFF"));
+                return true;
+
+            case  R.id.th3:
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+                tl.setBackgroundResource(R.drawable.th3);
+                tv.setTextColor(Color.parseColor("#880E4F"));
+                return true;
+
 
             default:
                 return super.onOptionsItemSelected(item);

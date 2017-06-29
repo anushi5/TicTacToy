@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.anushi.tictactoy.About">
+    tools:context="com.example.anushi.tictactoy.About"
+    android:background="@drawable/th5">
 
     <LinearLayout
         android:layout_width="match_parent"

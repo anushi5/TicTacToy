@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.anushi.tictactoy"
     android:id="@+id/innermenu">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        app:showAsAction="always"
+        android:title="@string/home"
+        />
     <group android:checkableBehavior="single">
 
     <item
@@ -36,5 +42,23 @@
         app:showAsAction="never"
         android:title="Theme 5"
         />
+    <item
+        android:id="@+id/th1"
+        android:orderInCategory="6"
+        app:showAsAction="never"
+        android:title="Theme6"
+        />
+    <item
+        android:id="@+id/th2"
+        android:orderInCategory="7"
+        app:showAsAction="never"
+        android:title="Theme7"
+            />
+    <item
+        android:id="@+id/th3"
+        android:orderInCategory="8"
+        app:showAsAction="never"
+        android:title="Theme8"/>
+
    </group>
 </menu>
