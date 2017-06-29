@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
 
@@ -24,6 +27,10 @@ public class SignUp extends AppCompatActivity {
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +98,14 @@ public class SignUp extends AppCompatActivity {
                                     Toast.makeText(SignUp.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(SignUp.this, OnlineGame.class));
+                                    FirebaseUser user= auth.getCurrentUser();
+                                    myRef.child("Users").child(remove(user.getEmail())).child("request").setValue(user.getUid());
+                                    // to signify i'm not playing
+                                    myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
+                                    myRef.child("Users").child(remove(user.getEmail())).child("request").push().setValue(user.getUid());
+                                    myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+
+                                    startActivity(new Intent(SignUp.this, Invite_Accept.class));
                                     finish();
                                 }
                             }
@@ -99,6 +113,13 @@ public class SignUp extends AppCompatActivity {
 
             }
         });
+    }
+
+    public String remove(String e_mail)
+    {
+        String[] split= e_mail.split("@");
+        return split[0];
+
     }
 
     @Override

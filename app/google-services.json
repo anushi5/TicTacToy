@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1090780273210-bc32eug9d3p8k0sftrlg8f2ilvtugsgm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anushi.tictactoy",
+            "certificate_hash": "ea98464509de9962a6118a155de2126c2c37ed9d"
+          }
+        },
+        {
           "client_id": "1090780273210-2ngigmdhuhrt58c8qfm0l6h8bvvi799v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
