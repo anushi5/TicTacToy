@@ -46,21 +46,15 @@
             android:id="@+id/th7"
             android:orderInCategory="7"
             app:showAsAction="never"
-<<<<<<< HEAD
-            android:title="Sky Da"
-=======
-            android:title="Sky Dancer"
->>>>>>> github/master
+             android:title="Sky Dancer"
+
             />
         <item
             android:id="@+id/th9"
             android:orderInCategory="8"
             app:showAsAction="never"
-<<<<<<< HEAD
-            android:title="Red"/>
-=======
             android:title="Bricks"/>
->>>>>>> github/master
+
 
         <item
             android:id="@+id/th10"
