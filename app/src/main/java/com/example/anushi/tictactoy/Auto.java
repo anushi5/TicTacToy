@@ -3,6 +3,7 @@ package com.example.anushi.tictactoy;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class Auto extends AppCompatActivity {
     int Winner = -1;
     int counts = 0;
     TableLayout tl;
+    MediaPlayer mysound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,42 +54,61 @@ public class Auto extends AppCompatActivity {
 
             case R.id.b1:
                 CellId = 1;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b2:
                 CellId = 2;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b3:
                 CellId = 3;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b4:
                 CellId = 4;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b5:
                 CellId = 5;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b6:
                 CellId = 6;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b7:
                 CellId = 7;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b8:
                 CellId = 8;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
             case R.id.b9:
                 CellId = 9;
+                mysound=MediaPlayer.create(Auto.this,R.raw.beep15);
+                mysound.start();
                 break;
 
 
         }
+        mysound.release();
         PlayGame(CellId, buSelected);
 
     }
@@ -102,14 +123,12 @@ public class Auto extends AppCompatActivity {
         Log.d("Player:", String.valueOf(CellId));
 
         if (ActivePlayer == 1) {
-            buSelected.setText("X");
-            buSelected.setBackgroundColor(Color.YELLOW);
+            buSelected.setBackgroundResource(R.drawable.kaata);
             Player1.add(CellId);
             ActivePlayer = 2;
             AutoPlay();
         } else if (ActivePlayer == 2) {
-            buSelected.setText("O");
-            buSelected.setBackgroundColor(Color.MAGENTA);
+            buSelected.setBackgroundResource(R.drawable.zero);
             Player2.add(CellId);
             ActivePlayer = 1;
         }
@@ -204,9 +223,18 @@ public class Auto extends AppCompatActivity {
             if (!(Player1.contains(CellId) || Player2.contains(CellId)))
                 EmptyCells.add(CellId);
 
-        Random r = new Random();
-        int RandIndex = r.nextInt(EmptyCells.size() - 0) + 0;
-        int cellId = EmptyCells.get(RandIndex);
+     //   Random r = new Random();
+     //  int RandIndex = r.nextInt(EmptyCells.size() - 0) + 0;
+     //   int cellId = EmptyCells.get(RandIndex);
+
+        int cellId=1;
+        int obj;
+        if(EmptyCells.contains(obj=1) || EmptyCells.contains(obj=3) || EmptyCells.contains(obj=7) || EmptyCells.contains(obj=9)) {
+            cellId=obj;
+        }
+         else if(EmptyCells.contains(obj=2) || EmptyCells.contains(obj=4) || EmptyCells.contains(obj=5) || EmptyCells.contains(obj=8)||
+                 EmptyCells.contains(obj=6))
+             cellId=obj;
 
         if(EmptyCells.isEmpty()==true) {
             Toast.makeText(this, "DRAW", Toast.LENGTH_LONG).show();
@@ -264,6 +292,9 @@ public class Auto extends AppCompatActivity {
 
     public void BackButton(View view) {
 
+        mysound =MediaPlayer.create(Auto.this,R.raw.beep5);
+        mysound.start();
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setIcon(R.drawable.warning);
         alert.setMessage("Are you sure you want to quit?");
@@ -271,6 +302,7 @@ public class Auto extends AppCompatActivity {
         alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mysound.release();
                 Toast.makeText(getApplicationContext(), "You clicked YES", Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -279,6 +311,7 @@ public class Auto extends AppCompatActivity {
         alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mysound.release();
                 Toast.makeText(getApplicationContext(), "You clicked NO", Toast.LENGTH_LONG).show();
             }
         });

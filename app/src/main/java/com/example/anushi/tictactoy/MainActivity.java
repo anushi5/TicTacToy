@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tv1,tv2;
     int counts=0;
     TableLayout tl;
+    MediaPlayer mysound;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,34 +53,53 @@ public class MainActivity extends AppCompatActivity {
         switch ((buSelected.getId())){
 
             case R.id.b1: CellId=1;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b2: CellId=2;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b3: CellId=3;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b4: CellId=4;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b5: CellId=5;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b6: CellId=6;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b7: CellId=7;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b8: CellId=8;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
             case R.id.b9: CellId=9;
+                mysound=MediaPlayer.create(MainActivity.this,R.raw.beep14);
+                mysound.start();
                 break;
 
 
         }
+        mysound.release();
        PlayGame(CellId,buSelected);
 
     }
@@ -92,15 +114,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Player:",String.valueOf(CellId));
 
         if(ActivePlayer==1){
-            buSelected.setText("X");
-            buSelected.setBackgroundColor(Color.RED);
+            buSelected.setBackgroundResource(R.drawable.kaata);
             Player1.add(CellId);
             ActivePlayer=2;
         }
 
         else if(ActivePlayer==2){
-            buSelected.setText("O");
-            buSelected.setBackgroundColor(Color.BLUE);
+            buSelected.setBackgroundResource(R.drawable.zero);
             Player2.add(CellId);
             ActivePlayer=1;
         }
@@ -202,6 +222,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void BackButton(View view) {
 
+        mysound=MediaPlayer.create(MainActivity.this,R.raw.beep5);
+        mysound.start();
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setIcon(R.drawable.warning);
         alert.setMessage("Are you sure you want to quit?");
@@ -209,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
         alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mysound.release();
                 Toast.makeText(getApplicationContext(),"You clicked YES",Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -217,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mysound.release();
                 Toast.makeText(getApplicationContext(),"You clicked NO",Toast.LENGTH_LONG).show();
             }
         });
