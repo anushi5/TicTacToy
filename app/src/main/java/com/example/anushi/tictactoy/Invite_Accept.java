@@ -65,7 +65,7 @@ public class Invite_Accept extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
-                templist.clear();;
+                templist.clear();
                 templist=getlist(dataSnapshot);
                 Adapter=new myAdapter(templist);
                 if(isInFront)
@@ -99,7 +99,7 @@ public class Invite_Accept extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), OnlineGame.class);
                     intent.putExtra("playgame",remove(user.getEmail())+":"+remove(start));
                     startActivity(intent);
-                   // finish();
+                    // finish();
 
                     // Todo later myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
                     //Todo later myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
@@ -236,10 +236,10 @@ public class Invite_Accept extends AppCompatActivity {
                     intent.putExtra("playgame",s.username+":"+remove(user.getEmail()));
                     intent.putExtra("keyofplayer",s.key);
                     startActivity(intent);
-                    //finish();
+                    finish();
                     Toast.makeText(getApplicationContext(),"game ended",Toast.LENGTH_SHORT).show();
                     // todo later myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
-                   // myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
+                    // myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
 
 
 
@@ -268,7 +268,7 @@ public class Invite_Accept extends AppCompatActivity {
 
 
 
-                   // Toast.makeText(getApplicationContext(),"CANNOT START THE GAME PLAYER IS BUSY",Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(),"CANNOT START THE GAME PLAYER IS BUSY",Toast.LENGTH_SHORT).show();
 
 
                 }
