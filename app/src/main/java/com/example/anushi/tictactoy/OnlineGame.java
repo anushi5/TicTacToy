@@ -158,8 +158,8 @@ public class OnlineGame extends AppCompatActivity {
 
     }
 
-    View view=this.findViewById(android.R.id.content).getRootView();
-    if()
+    //View view=this.findViewById(android.R.id.content).getRootView();
+    //if()
     public String remove(String e_mail)
     {
         String[] split= e_mail.split("@");
