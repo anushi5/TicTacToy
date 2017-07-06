@@ -73,6 +73,9 @@
             android:name=".OnlineGame"
             android:label="Game" />
         <activity
+            android:name=".Invite_Accept"
+            android:label="Invite_Accept" />
+        <activity
             android:name=".ProfileAct"
             android:label="Profile"
             android:parentActivityName=".Main2Activity"/>

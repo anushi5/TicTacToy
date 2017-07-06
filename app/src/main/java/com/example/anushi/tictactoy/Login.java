@@ -39,7 +39,7 @@ public  class Login extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(Login.this, Invite_Accept.class));
+            startActivity(new Intent(getApplicationContext(),Invite_Accept.class));
             finish();
         }
 
@@ -76,6 +76,7 @@ public  class Login extends AppCompatActivity {
                 final String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
+
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
                     return;
@@ -108,14 +109,16 @@ public  class Login extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext()," Logged in!!",Toast.LENGTH_SHORT).show();
                                     // adding to real time database
                                     FirebaseUser user= auth.getCurrentUser();
-                                    //myRef.child("Users").child(remove(user.getEmail())).child("request").setValue(user.getUid());
+                                    myRef.child("Users").child(remove(user.getEmail())).child("request").setValue(user.getUid());
                                     myRef.child("Users").child(remove(user.getEmail())).child("request").push().setValue(user.getUid());
                                     // to signify i'm not playing
+
+
                                     myRef.child("Users").child(remove(user.getEmail())).child("playing").setValue("free");
                                     myRef.child("Users").child(remove(user.getEmail())).child("with").setValue(user.getUid());
-                                    Intent intent = new Intent(Login.this, Invite_Accept.class);
+                                    Intent intent = new Intent(getApplicationContext(),Invite_Accept.class);
                                     startActivity(intent);
-                                    finish();
+                                    //finish();
                                 }
                             }
                         });
@@ -130,3 +133,4 @@ public  class Login extends AppCompatActivity {
 
     }
 }
+

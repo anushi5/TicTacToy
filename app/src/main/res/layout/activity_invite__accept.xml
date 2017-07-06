@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
     tools:context="com.example.anushi.tictactoy.Invite_Accept">
 
     <TextView
@@ -48,7 +47,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="34dp"
-        android:background="@color/colorAccent"
+
         android:onClick="busend_invite"
         android:text="SEND INVITE"
         android:textSize="18sp"
