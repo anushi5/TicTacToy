@@ -25,7 +25,6 @@
         <activity
             android:name=".MainActivity"
             android:label="Game"
-            android:roundIcon="@drawable/icon1"
             android:parentActivityName=".NameTwo"/>
 
         <activity android:name=".Auto"
@@ -38,7 +37,7 @@
             android:label="Names"
             android:noHistory="true"
             android:parentActivityName=".Main2Activity"
-            android:roundIcon="@drawable/icon2"/>
+            />
 
         <activity
             android:name=".NameAuto"
@@ -46,7 +45,7 @@
             android:label="Name"
             android:noHistory="true"
             android:parentActivityName=".Main2Activity"
-            android:roundIcon="@drawable/icon2"/>
+            />
 
         <activity android:name=".Main2Activity"
             android:roundIcon="@drawable/home"/>
@@ -56,7 +55,7 @@
             android:excludeFromRecents="true"
             android:label="Authentication"
             android:noHistory="true"
-            android:parentActivityName=".Main2Activity"/>
+            android:parentActivityName=".Invite_Accept"/>
         <activity
             android:name=".SignUp"
             android:excludeFromRecents="true"
@@ -68,20 +67,22 @@
             android:excludeFromRecents="true"
             android:label="Reset"
             android:noHistory="true"
-            android:parentActivityName=".Main2Activity"/>
+            android:parentActivityName=".Login"/>
         <activity
             android:name=".OnlineGame"
-            android:label="Game" />
+            android:label="Game"
+            android:parentActivityName=".Invite_Accept"/>
         <activity
             android:name=".Invite_Accept"
-            android:label="Invite_Accept" />
+            android:label="Invite_Accept"
+            android:parentActivityName=".Main2Activity"/>
         <activity
             android:name=".ProfileAct"
             android:label="Profile"
             android:parentActivityName=".Main2Activity"/>
         <activity android:name=".About"
             android:parentActivityName=".Main2Activity"
-            android:roundIcon="@drawable/about"/>
+            />
     </application>
 
 </manifest>
