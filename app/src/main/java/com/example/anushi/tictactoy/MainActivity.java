@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tv1,tv2;
     int counts=0;
     TableLayout tl;
+    MediaPlayer mysound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,15 +94,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Player:",String.valueOf(CellId));
 
         if(ActivePlayer==1){
-            buSelected.setText("X");
-            buSelected.setBackgroundColor(Color.RED);
+            buSelected.setBackgroundResource(R.drawable.kaatag);
             Player1.add(CellId);
             ActivePlayer=2;
         }
 
         else if(ActivePlayer==2){
-            buSelected.setText("O");
-            buSelected.setBackgroundColor(Color.BLUE);
+            buSelected.setBackgroundResource(R.drawable.zerog);
             Player2.add(CellId);
             ActivePlayer=1;
         }
@@ -202,6 +202,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void BackButton(View view) {
 
+        mysound = MediaPlayer.create(MainActivity.this,R.raw.beep5);
+        mysound.start();
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setIcon(R.drawable.warning);
         alert.setMessage("Are you sure you want to quit?");
@@ -209,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mysound.release();
                 Toast.makeText(getApplicationContext(),"You clicked YES",Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -218,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(),"You clicked NO",Toast.LENGTH_LONG).show();
+                mysound.release();
             }
         });
 

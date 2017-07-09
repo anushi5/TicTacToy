@@ -10,14 +10,12 @@ import java.util.Locale;
 
 public class Splash extends AppCompatActivity {
 
-    TextView tv;
     TextToSpeech t1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        tv=(TextView)findViewById(R.id.tv);
         t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {

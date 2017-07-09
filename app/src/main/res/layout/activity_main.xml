@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:gravity="center"
-    android:background="@drawable/check1"
+    android:background="@drawable/wall1"
     android:id="@+id/tl">
 
     <TableRow
@@ -21,8 +21,8 @@
             android:layout_width="50dp"
             android:layout_marginLeft="20dp"
             android:layout_height="match_parent"
-            android:textColor="#009688"
-            android:textSize="20dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="22dp"
             android:text="Player 1"
             android:inputType="textPersonName"
             android:layout_weight="1"
@@ -34,8 +34,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:text="Player 2"
-            android:textColor="#009688"
-            android:textSize="20dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="22dp"
             android:layout_weight="1"
             />
     </TableRow>
@@ -130,6 +130,7 @@
             android:layout_height="50dp"
             android:id="@+id/quit"
             android:layout_marginLeft="145dp"
+            android:layout_marginTop="20dp"
             android:onClick="BackButton"
             android:background="@drawable/quit2"
             />

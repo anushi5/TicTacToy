@@ -123,12 +123,12 @@ public class Auto extends AppCompatActivity {
         Log.d("Player:", String.valueOf(CellId));
 
         if (ActivePlayer == 1) {
-            buSelected.setBackgroundResource(R.drawable.kaata);
+            buSelected.setBackgroundResource(R.drawable.kaatag);
             Player1.add(CellId);
             ActivePlayer = 2;
             AutoPlay();
         } else if (ActivePlayer == 2) {
-            buSelected.setBackgroundResource(R.drawable.zero);
+            buSelected.setBackgroundResource(R.drawable.zerog);
             Player2.add(CellId);
             ActivePlayer = 1;
         }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.anushi.tictactoy.NameAuto"
-    android:background="@drawable/th1"
+    android:background="@drawable/button"
     android:id="@+id/tl">
 
     <TableRow
@@ -20,7 +20,7 @@
             android:fontFamily="cursive"
             android:textSize="40dp"
             android:gravity="center"
-            android:textColor="#f6732342"
+            android:textColor="@color/colorAccent"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"/>
     </TableRow>
@@ -35,7 +35,8 @@
             android:layout_marginTop="70dp"
             android:layout_marginLeft="60dp"
             android:layout_height="wrap_content"
-            android:textColor="#004d40"
+            android:textColor="#000000"
+            android:textSize="20dp"
             android:ems="10"
             android:maxLength="8"
             android:inputType="textPersonName"
@@ -55,8 +56,9 @@
             android:onClick="buClick"
             android:shadowColor="#283593"
             android:gravity="center"
-            android:background="#d32f2f"
-            android:textColor="#ffffff"
+            android:background="@null"
+            android:textSize="20dp"
+            android:textColor="#000000"
             android:layout_height="match_parent"
             android:text="Start"
             android:fontFamily="sans-serif-condensed"/>

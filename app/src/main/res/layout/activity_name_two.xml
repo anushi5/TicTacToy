@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.anushi.tictactoy.NameTwo"
-    android:background="@drawable/bg5"
+    android:background="@drawable/button"
     android:id="@+id/tl">
 
     <TableRow
@@ -20,7 +20,7 @@
             android:gravity="center"
             android:fontFamily="cursive"
             android:textSize="40dp"
-            android:textColor="#f78561"
+            android:textColor="@color/colorAccent"
             android:textColorHighlight="@color/colorPrimary"
             android:backgroundTint="@color/colorAccent"
             android:layout_marginTop="20dp"
@@ -29,14 +29,16 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <AutoCompleteTextView
             android:id="@+id/et1"
             android:layout_marginTop="50dp"
             android:layout_width="350dp"
             android:layout_height="match_parent"
-            android:textColor="#004d40"
+            android:textColor="#000000"
             android:hint="Player 1"
             android:maxLength="8"
             android:textSize="25dp"
@@ -45,18 +47,20 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <AutoCompleteTextView
             android:id="@+id/et2"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#004d40"
+            android:textColor="#000000"
             android:inputType="textPersonName"
             android:textSize="25dp"
             android:maxLength="8"
-            android:hint="player 2" />
+            android:hint="Player 2" />
     </TableRow>
 
     <TableRow
@@ -70,7 +74,8 @@
             android:layout_marginLeft="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#d32f2f"
+            android:background="@null"
+            android:textSize="20dp"
             android:onClick="buClick"
             android:text="start"
             />

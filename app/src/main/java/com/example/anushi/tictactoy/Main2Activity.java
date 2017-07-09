@@ -9,6 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import static com.example.anushi.tictactoy.R.id.menu_logout;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -70,12 +75,20 @@ public class Main2Activity extends AppCompatActivity {
             }
                 return true;
             case R.id.menu_settings:
+                Toast.makeText(Main2Activity.this,"No settings to show",Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.menu_logout:
+            case menu_logout:{
+                Toast.makeText(Main2Activity.this,"Logged out",Toast.LENGTH_LONG).show();
+                logout();
+            }
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void logout(){
+        FirebaseAuth.getInstance().signOut();
     }
 }

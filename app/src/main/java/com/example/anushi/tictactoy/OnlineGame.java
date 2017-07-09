@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class OnlineGame extends AppCompatActivity {
     int counts=0;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+    TableLayout tl;
     FirebaseAuth auth;
     FirebaseUser user;
     int turn=0;
@@ -36,6 +38,9 @@ public class OnlineGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online);
+
+        tl=(TableLayout)findViewById(R.id.tl);
+
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         Bundle b=getIntent().getExtras();
@@ -104,7 +109,9 @@ public class OnlineGame extends AppCompatActivity {
 
 
                         }
-                        PlayGame(cid,buSelected,split[1]);
+
+                            PlayGame(cid,buSelected,split[1]);
+
                     }
                     else
                     {
@@ -143,7 +150,7 @@ public class OnlineGame extends AppCompatActivity {
                                 break;
 
                         }
-                        PlayGame(cid,buSelected,split[1]);
+                            PlayGame(cid,buSelected,split[1]);
 
                     }
                 }
@@ -227,21 +234,22 @@ public class OnlineGame extends AppCompatActivity {
     ArrayList<Integer> Player2 = new ArrayList<Integer>();
 
 
-    void PlayGame(int CellId, Button buSelected,String name){
+    void PlayGame(int CellId, Button buSelected,String name) {
 
 
         if(name.matches(p1)){
-            buSelected.setText("X");
-            buSelected.setBackgroundColor(Color.YELLOW);
+            buSelected.setBackgroundResource(R.drawable.kaatag);
             Player1.add(CellId);
+            tl.setEnabled(false);
             ActivePlayer=2;
         }
 
         else if(name.matches(p2)){
-            buSelected.setText("O");
-            buSelected.setBackgroundColor(Color.BLUE);
+            buSelected.setBackgroundResource(R.drawable.zerog);
             Player2.add(CellId);
-            ActivePlayer=1;
+            tl.setEnabled(false);
+            ActivePlayer = 1;
+
         }
 
         buSelected.setEnabled(false);
